@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Home</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="container">
+    <h1>Bienvenido, Administrador!</h1>
+
+    <h2>Eventos Recientes</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Título</th>
+            <th>Descripción</th>
+            <th>Fecha y Hora</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="event : ${events}">
+            <td th:text="${event.title}"></td>
+            <td th:text="${event.description}"></td>
+            <td th:text="${#temporals.format(event.eventDate, 'dd/MM/yyyy HH:mm')}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a th:href="@{/admin/add-event}" class="btn btn-primary">Agregar Nuevo Evento</a>
+    <a th:href="@{/admin/events}" class="btn btn-secondary">Ver Todos los Eventos</a>
+</div>
+</body>
+</html>
